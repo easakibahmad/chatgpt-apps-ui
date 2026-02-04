@@ -46,17 +46,17 @@ export default function AppsPage() {
               onBack={() => setSelectedApp(null)} 
             />
           ) : (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 h-[74px] pt-0 px-[40px] pb-[16px]">
               {/* Header */}
-              <div className="flex items-start justify-between">
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <h1 className="text-2xl font-semibold text-foreground">Apps</h1>
-                    <span className="px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground border border-border rounded">
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col gap-1 ml-1.5">
+                  <div className="flex items-center gap-2 text-[#0D0D0D]">
+                    <h1 className="text-2xl">Apps</h1>
+                    <span className="w-[33.67px] h-[18px] px-1.25 py-0.5 text-[9px] text-[#8f8f8f] font-medium border border-border rounded-lg">
                       BETA
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-md text-[#8F8F8F]">
                     Mit deinen Lieblings-Apps in ChatGPT chatten
                   </p>
                 </div>
@@ -67,7 +67,7 @@ export default function AppsPage() {
                   <input
                     type="text"
                     placeholder="Apps suchen"
-                    className="w-56 h-9 pl-9 pr-4 rounded-lg bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+                    className="w-[256px] h-[38px] pl-9 pr-4 rounded-full bg-background border border-border text-sm text-[#0d0d0d] placeholder:text-[#0d0d0d] placeholder:opacity-50 focus:outline-none transition-all"
                   />
                 </div>
               </div>
