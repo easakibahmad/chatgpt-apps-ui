@@ -441,108 +441,66 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
 
   return (
     <div className="mx-auto w-full max-w-4xl px-10">
+      <div className="flex items-center flex-shrink k-0 w-fit -mt-20 mb-8">
+        <div className=" w-[64px] h-[64px] rounded-full bg-white shadow-sm p-2 flex items-center justify-center flex-shrink-0 overflow-hidden">
+          <div className="scale-[0.65]">{app.icon}</div>
+        </div>
+      </div>
       {/* Header */}
       <div className="mb-8">
-          <div className="flex items-center justify-between mb-1">
-            <h1 className="text-2xl font-medium" style={{ color: "#0D0D0D" }}>
-              {app.name}
-            </h1>
-            {isLoading ? (
-              <button
-                disabled
-                className="px-5 py-2.5 bg-gray-200 text-gray-500 rounded-full text-sm font-medium flex items-center gap-2"
-              >
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Wird geladen
-              </button>
-            ) : (
-              <button
-                className="bg-black text-white rounded-full text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity px-4"
-                style={{ height: "36px" }}
-              >
-                Verbinden
-              </button>
-            )}
-          </div>
-          <p className="text-sm mt-2" style={{ color: "#5D5D5D" }}>
-            {app.subtitle}
-          </p>
+        <div className="flex items-center justify-between mb-1">
+          <h1 className="text-2xl font-medium" style={{ color: "#0D0D0D" }}>
+            {app.name}
+          </h1>
+          {isLoading ? (
+            <button
+              disabled
+              className="px-5 py-2.5 bg-gray-200 text-gray-500 rounded-full text-sm font-medium flex items-center gap-2"
+            >
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Wird geladen
+            </button>
+          ) : (
+            <button
+              className="bg-black text-white rounded-full text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity px-4"
+              style={{ height: "36px" }}
+            >
+              Verbinden
+            </button>
+          )}
         </div>
-        {/* Screenshot Carousel */}
+        <p className="text-sm mt-2" style={{ color: "#5D5D5D" }}>
+          {app.subtitle}
+        </p>
+      </div>
+      {/* Screenshot Carousel */}
+      <div
+        className="relative mb-8 overflow-visible"
+        style={{
+          paddingLeft:
+            app.screenshots.length > 3 && currentSlide > 0 ? "30px" : "0",
+          paddingRight:
+            app.screenshots.length > 3 && currentSlide === 0 ? "30px" : "0",
+        }}
+      >
         <div
-          className="relative mb-8 overflow-visible"
+          ref={carouselRef}
+          className="flex gap-2"
           style={{
-            paddingLeft:
-              app.screenshots.length > 3 && currentSlide > 0 ? "30px" : "0",
-            paddingRight:
-              app.screenshots.length > 3 && currentSlide === 0 ? "30px" : "0",
+            transform: `translateX(${currentSlide > 0 ? -60 : 0}px)`,
+            transition: "transform 0.3s ease-in-out",
           }}
         >
-          <div
-            ref={carouselRef}
-            className="flex gap-2"
-            style={{
-              transform: `translateX(${currentSlide > 0 ? -60 : 0}px)`,
-              transition: "transform 0.3s ease-in-out",
-            }}
-          >
-            {app.screenshots.map((screenshot, index) => {
-              const totalCards = app.screenshots.length;
-              if (totalCards <= 3) {
-                // Show all cards if 3 or less
-                return (
-                  <div
-                    key={index}
-                    className={cn(
-                      "flex-shrink-0 w-[264px] h-[335px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
-                      screenshot.gradient,
-                    )}
-                  >
-                    {isLoading ? (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg
-                          className="w-8 h-8 animate-spin"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19"
-                            stroke="#5c5c5c"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </div>
-                    ) : (
-                      screenshot.content
-                    )}
-                  </div>
-                );
-              }
-
-              // For more than 3 cards
-              const isRightPartial = currentSlide === 0 && index === 3;
-              const isLeftPartial =
-                currentSlide > 0 && index === currentSlide - 1;
-              const isVisible =
-                currentSlide === 0
-                  ? index >= 0 && index < 3
-                  : index >= currentSlide && index < currentSlide + 3;
-
-              const shouldShow = isVisible || isRightPartial || isLeftPartial;
-              if (!shouldShow) return null;
-
+          {app.screenshots.map((screenshot, index) => {
+            const totalCards = app.screenshots.length;
+            if (totalCards <= 3) {
+              // Show all cards if 3 or less
               return (
                 <div
                   key={index}
                   className={cn(
-                    "flex-shrink-0 h-[335px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
+                    "flex-shrink-0 w-[264px] h-[335px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
                     screenshot.gradient,
-                    isRightPartial
-                      ? "w-[30px]"
-                      : isLeftPartial
-                        ? "w-[30px]"
-                        : "w-[264px]",
                   )}
                 >
                   {isLoading ? (
@@ -563,99 +521,146 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
                   ) : (
                     screenshot.content
                   )}
-                  {/* Fade overlay for partially visible cards */}
-                  {(isRightPartial || isLeftPartial) && (
-                    <div
-                      className={cn(
-                        "absolute inset-0 pointer-events-none",
-                        isRightPartial
-                          ? "bg-gradient-to-r from-transparent via-transparent to-white/80"
-                          : "bg-gradient-to-l from-transparent via-transparent to-white/80",
-                      )}
-                    />
-                  )}
                 </div>
               );
-            })}
-          </div>
+            }
 
-          {/* Navigation Arrows */}
-          {currentSlide > 0 && (
-            <button
-              onClick={prevSlide}
-              className="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200 z-10"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-600" />
-            </button>
-          )}
-          {app.screenshots.length > 3 &&
-            currentSlide < app.screenshots.length - 3 && (
-              <button
-                onClick={nextSlide}
-                className="cursor-pointer absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
-                style={{ right: "-13px" }}
+            // For more than 3 cards
+            const isRightPartial = currentSlide === 0 && index === 3;
+            const isLeftPartial =
+              currentSlide > 0 && index === currentSlide - 1;
+            const isVisible =
+              currentSlide === 0
+                ? index >= 0 && index < 3
+                : index >= currentSlide && index < currentSlide + 3;
+
+            const shouldShow = isVisible || isRightPartial || isLeftPartial;
+            if (!shouldShow) return null;
+
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "flex-shrink-0 h-[335px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
+                  screenshot.gradient,
+                  isRightPartial
+                    ? "w-[30px]"
+                    : isLeftPartial
+                      ? "w-[30px]"
+                      : "w-[264px]",
+                )}
               >
-                <ChevronRight className="w-6 h-6 text-gray-500" />
-              </button>
-            )}
+                {isLoading ? (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 animate-spin"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19"
+                        stroke="#5c5c5c"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </div>
+                ) : (
+                  screenshot.content
+                )}
+                {/* Fade overlay for partially visible cards */}
+                {(isRightPartial || isLeftPartial) && (
+                  <div
+                    className={cn(
+                      "absolute inset-0 pointer-events-none",
+                      isRightPartial
+                        ? "bg-gradient-to-r from-transparent via-transparent to-white/80"
+                        : "bg-gradient-to-l from-transparent via-transparent to-white/80",
+                    )}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Description */}
-        <div className="mb-8">
-          <p className="text-sm leading-relaxed" style={{ color: "#5D5D5D" }}>
-            {app.longDescription}
-          </p>
+        {/* Navigation Arrows */}
+        {currentSlide > 0 && (
+          <button
+            onClick={prevSlide}
+            className="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200 z-10"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-600" />
+          </button>
+        )}
+        {app.screenshots.length > 3 &&
+          currentSlide < app.screenshots.length - 3 && (
+            <button
+              onClick={nextSlide}
+              className="cursor-pointer absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
+              style={{ right: "-13px" }}
+            >
+              <ChevronRight className="w-6 h-6 text-gray-500" />
+            </button>
+          )}
+      </div>
 
-          {app.howToUse && (
-            <div className="mt-6">
-              <p className="text-sm" style={{ color: "#5D5D5D" }}>
-                {app.howToUse}
+      {/* Description */}
+      <div className="mb-8">
+        <p className="text-sm leading-relaxed" style={{ color: "#5D5D5D" }}>
+          {app.longDescription}
+        </p>
+
+        {app.howToUse && (
+          <div className="mt-6">
+            <p className="text-sm" style={{ color: "#5D5D5D" }}>
+              {app.howToUse}
+            </p>
+            {app.steps?.map((step, index) => (
+              <p
+                key={index}
+                className="text-sm mt-2"
+                style={{ color: "#5D5D5D" }}
+              >
+                - {step}
               </p>
-              {app.steps?.map((step, index) => (
-                <p
-                  key={index}
-                  className="text-sm mt-2"
-                  style={{ color: "#5D5D5D" }}
-                >
-                  - {step}
-                </p>
-              ))}
+            ))}
+          </div>
+        )}
+
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={() => setShowMore(!showMore)}
+            className="text-sm hover:underline cursor-pointer"
+          >
+            Mehr
+          </button>
+        </div>
+      </div>
+
+      {/* Information Section */}
+      <div className="py-2 mb-4">
+        <h2
+          className="text-xl font-normal border-b border-border mb-4 py-2"
+          style={{ color: "#0D0D0D" }}
+        >
+          Info
+        </h2>
+        <div className="grid grid-cols-2 gap-y-4">
+          <div>
+            <p className="text-sm text-[#8F8F8F]">Kategorie</p>
+            <p className="text-sm mt-[8px] text-[#8F8F8F]">{app.category}</p>
+          </div>
+          {app.capabilities && (
+            <div>
+              <p className="text-sm text-[#0D0D0D]">Fähigkeiten</p>
+              <p className="text-sm mt-[8px] text-[#0D0D0D]">
+                {app.capabilities}
+              </p>
             </div>
           )}
-
-          <div className="flex justify-end mt-4">
-            <button
-              onClick={() => setShowMore(!showMore)}
-              className="text-sm hover:underline cursor-pointer"
-            >
-              Mehr
-            </button>
-          </div>
         </div>
-
-        {/* Information Section */}
-        <div className="py-2 mb-4">
-          <h2
-            className="text-xl font-normal border-b border-border mb-4 py-2"
-            style={{ color: "#0D0D0D" }}
-          >
-            Info
-          </h2>
-          <div className="grid grid-cols-2 gap-y-4">
-            <div>
-              <p className="text-sm text-[#8F8F8F]">Kategorie</p>
-              <p className="text-sm mt-[8px] text-[#8F8F8F]">{app.category}</p>
-            </div>
-            {app.capabilities && (
-              <div>
-                <p className="text-sm text-[#0D0D0D]">Fähigkeiten</p>
-                <p className="text-sm mt-[8px] text-[#0D0D0D]">
-                  {app.capabilities}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
+      </div>
     </div>
   );
 }

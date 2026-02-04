@@ -75,12 +75,6 @@ export default function AppsPage() {
               <ChevronRight className="w-4 h-4 text-gray-400" />
               <span className="text-gray-500">{app.name}</span>
             </nav>
-
-            <div className="flex items-center">
-              <div className="w-[64px] h-[64px] rounded-full bg-white shadow-sm p-2 flex items-center justify-center flex-shrink-0 overflow-hidden">
-                <div className="scale-[0.65]">{app.icon}</div>
-              </div>
-            </div>
           </div>
         )}
         <div className="mx-auto my-6 w-full max-w-4xl sm:my-12">
