@@ -23,21 +23,23 @@ export default function AppsPage() {
     <div className="min-h-screen bg-background">
       <Sidebar isOpen={sidebarOpen} />
       
-      {/* Top right header */}
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-4">
-        <span className="text-sm font-medium text-foreground">GPTs</span>
-        <button className="p-2 hover:bg-accent rounded-lg transition-colors">
-          <Settings className="w-5 h-5 text-muted-foreground" />
-        </button>
-      </div>
-      
       <main
         className={cn(
           "min-h-screen transition-all duration-300 ease-in-out",
           sidebarOpen ? "ml-[260px]" : "ml-0"
         )}
       >
-        <div className="max-w-4xl mx-auto px-6 py-8">
+        {/* Top nav */}
+        <div className="flex items-center justify-end gap-4 p-2 h-[52px]">
+          <div className="py-1.5 px-2 rounded-2xl hover:bg-[#eaeaea] transition-colors cursor-pointer">
+            <span className="text-sm font-medium text-foreground">GPTs</span>
+          </div>
+          <button className="py-2 px-2  hover:bg-[#eaeaea] rounded-2xl transition-colors cursor-pointer">
+            <Settings className="w-5 h-5 text-muted-foreground" />
+          </button>
+        </div>
+        
+        <div className="mx-auto my-6 w-full max-w-4xl sm:my-12">
           {selectedApp ? (
             <AppDetail 
               appId={selectedApp} 
