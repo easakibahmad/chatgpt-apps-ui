@@ -488,17 +488,17 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
         </div>
 
       {/* Information Section */}
-      <div className="border-t border-border pt-6">
-        <h2 className="text-sm font-semibold mb-4">Info</h2>
+      <div className="py-2 mb-4">
+        <h2 className="text-xl font-normal border-b border-border mb-4 py-2" style={{ color: '#0D0D0D' }}>Info</h2>
         <div className="grid grid-cols-2 gap-y-4">
           <div>
-            <p className="text-sm text-muted-foreground">Kategorie</p>
-            <p className="text-sm mt-0.5" style={{ color: '#5D5D5D' }}>{app.category}</p>
+            <p className="text-sm text-[#8F8F8F]">Kategorie</p>
+            <p className="text-sm mt-[8px] text-[#8F8F8F]">{app.category}</p>
           </div>
           {app.capabilities && (
             <div>
-              <p className="text-sm text-muted-foreground">Fähigkeiten</p>
-              <p className="text-sm mt-0.5" style={{ color: '#5D5D5D' }}>{app.capabilities}</p>
+              <p className="text-sm text-[#0D0D0D]">Fähigkeiten</p>
+              <p className="text-sm mt-[8px] text-[#0D0D0D]">{app.capabilities}</p>
             </div>
           )}
         </div>
