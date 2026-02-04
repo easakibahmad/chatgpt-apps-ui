@@ -206,7 +206,7 @@ export function FeaturedCarousel() {
 
   return (
     <div className="relative">
-      <div className="relative h-[260px] rounded-2xl overflow-hidden bg-gradient-to-r from-cyan-400 via-cyan-300 to-yellow-200">
+      <div className="relative h-[320px] rounded-4xl overflow-hidden bg-gradient-to-r from-cyan-400 via-cyan-300 to-yellow-200">
         {/* Content */}
         <div className="relative z-10 p-6 h-full flex flex-col max-w-[45%]">
           {activeApp.icon}
