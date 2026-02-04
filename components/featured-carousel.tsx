@@ -223,7 +223,7 @@ export function FeaturedCarousel() {
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {featuredApps.map((app, index) => (
-            <div key={app.id} className="min-w-full h-full relative flex-shrink-0">
+            <div key={app.id} className="min-w-full h-full relative flex-shrink-0 cursor-pointer">
               {/* Content */}
               <div className="relative z-10 p-6 h-full flex flex-col max-w-[45%]">
                 {app.icon}
@@ -233,7 +233,7 @@ export function FeaturedCarousel() {
                 <p className="text-sm text-white/90 mt-1 drop-shadow-sm">
                   {app.subtitle}
                 </p>
-                <button className="mt-4 px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg w-fit transition-colors">
+                <button className="mt-4 px-5 h-[32px] bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-full w-fit transition-colors cursor-pointer">
                   Anzeigen
                 </button>
               </div>
@@ -263,9 +263,9 @@ export function FeaturedCarousel() {
         {canGoLeft && (
           <button
             onClick={prevSlide}
-            className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#0000000F] rounded-full shadow-lg flex items-center justify-center hover:bg-[#0000001A] transition-all duration-300 ease-in-out z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
+            className="cursor-pointer absolute left-4 z-8 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#0000000F] rounded-full shadow-lg flex items-center justify-center hover:bg-[#0000001A] transition-all duration-300 ease-in-out z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-600" />
+            <ChevronLeft className="w-6 h-6 text-white" />
           </button>
         )}
         
@@ -275,7 +275,7 @@ export function FeaturedCarousel() {
             onClick={nextSlide}
             className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#0000000F] rounded-full shadow-sm flex items-center justify-center hover:bg-[#0000001A] transition-all duration-300 ease-in-out z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
-            <ChevronRight className="w-6 h-6 text-gray-500" />
+            <ChevronRight className="w-6 h-6 text-white" />
           </button>
         )}
       </div>
