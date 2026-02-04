@@ -549,16 +549,17 @@ export function AppsGrid({ category, onAppClick }: AppsGridProps) {
     : allApps.filter(app => app.category === category);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-2 -mt-1 mb-16">
-      {filteredApps.map((app) => (
-        <AppCard
-          key={app.id}
-          id={app.id}
-          name={app.name}
-          description={app.description}
-          icon={app.icon}
-          onClick={() => onAppClick?.(app.id)}
-        />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-2 -mt-1">
+      {filteredApps.map((app, index) => (
+        <div key={app.id} className={index === filteredApps.length - 1 ? 'mb-[88px]' : ''}>
+          <AppCard
+            id={app.id}
+            name={app.name}
+            description={app.description}
+            icon={app.icon}
+            onClick={() => onAppClick?.(app.id)}
+          />
+        </div>
       ))}
     </div>
   );
