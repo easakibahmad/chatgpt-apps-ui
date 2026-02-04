@@ -92,29 +92,32 @@ export function Sidebar({ isOpen }: SidebarProps) {
       </div>
 
       {/* User Profile & Invite team */}
-      <div className="mt-auto p-3">
-        <div className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-sidebar-accent transition-colors cursor-pointer">
-          <Avatar className="w-8 h-8">
-            <AvatarFallback className="bg-teal-500 text-white text-sm font-medium">
+      <div className="mt-auto mx-1.5 h-[123.14px]">
+        <div className="h-[51.14px] mx-auto flex items-center gap-2 px-[6px] pt-[6px] pr-[10px] pb-[6px] pl-[8px] rounded-lg hover:bg-[#0000000F] cursor-pointer">
+          <Avatar className="w-6 h-6">
+            <AvatarFallback className="bg-[#7f8c8d] text-white text-[10px] font-medium">
               SK
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col min-w-0">
-            <span className="text-sm font-medium truncate">Sara Karimi</span>
-            <span className="text-xs text-muted-foreground truncate">QAVION RECRUITING</span>
+            <span className="text-sm text-[#0D0D0D] truncate">Sara Karimi</span>
+            <span className="text-xs text-[#8F8F8F] truncate">QAVION RECRUITING</span>
           </div>
         </div>
         
         {/* Invite team members button */}
-        <button className="w-full mt-2 px-4 py-2 border border-border rounded-lg text-sm font-medium flex items-center justify-center gap-2 hover:bg-sidebar-accent transition-colors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          Teammitglieder einladen
-        </button>
+        <div className="m-4 mt-2 mx-auto">
+          <button className="w-[228px] py-0 px-4 text-xs h-9 mx-auto border border-[#0d0d0d1a] rounded-2xl text-sm bg-[#FFFFFF] text-[#0D0D0D]
+          font-medium flex items-center justify-center gap-2 hover:bg-[#f9f9f9] transition-colors cursor-pointer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Teammitglieder einladen
+          </button>
+        </div>
       </div>
     </aside>
   );
