@@ -30,14 +30,16 @@ export default function AppsPage() {
         )}
       >
         {/* Top nav */}
-        <div className="flex items-center justify-end gap-4 p-2 h-[52px]">
-          <div className="py-1.5 px-2 rounded-2xl hover:bg-[#eaeaea] transition-colors cursor-pointer">
-            <span className="text-sm font-medium text-foreground">GPTs</span>
+        {!selectedApp && (
+          <div className="flex items-center justify-end gap-4 p-2 h-[52px]">
+            <div className="py-1.5 px-2 rounded-2xl hover:bg-[#eaeaea] transition-colors cursor-pointer">
+              <span className="text-sm font-medium text-foreground">GPTs</span>
+            </div>
+            <button className="py-2 px-2  hover:bg-[#eaeaea] rounded-2xl transition-colors cursor-pointer">
+              <Settings className="w-5 h-5 text-muted-foreground" />
+            </button>
           </div>
-          <button className="py-2 px-2  hover:bg-[#eaeaea] rounded-2xl transition-colors cursor-pointer">
-            <Settings className="w-5 h-5 text-muted-foreground" />
-          </button>
-        </div>
+        )}
         
         <div className="mx-auto my-6 w-full max-w-4xl sm:my-12">
           {selectedApp ? (

@@ -27,7 +27,7 @@ const appDetails: Record<string, {
     longDescription: "Visualize files and topics with interactive Knowledge Graphs. Transform your documents into structured networks where you can simply click nodes to explain concepts and clarify relationships instantly—making complex information easy to digest.",
     howToUse: "- Interactive Exploration: Go beyond a static image. Interact with the graph to understand the underlying logic.",
     steps: [
-      "Explain Concepts: Click on any node to get a clear definition and background....",
+      "Explain Concepts: Click on any node to get a clear definition and background",
     ],
     category: "Bildung",
     icon: (
@@ -320,7 +320,7 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
   }, [appId]);
   
   const nextSlide = () => {
-    setCurrentSlide((prev) => Math.min(prev + 1, app.screenshots.length - 1));
+    setCurrentSlide((prev) => Math.min(prev + 1, app.screenshots.length > 3 ? app.screenshots.length - 3 : app.screenshots.length - 1));
   };
   
   const prevSlide = () => {
@@ -328,26 +328,14 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm mb-8">
-        <button 
-          onClick={onBack}
-          className="text-foreground hover:underline"
-        >
-          Apps
-        </button>
-        <ChevronRight className="w-4 h-4 text-muted-foreground" />
-        <span className="text-muted-foreground">{app.name}</span>
-      </div>
-
+    <div className="mx-auto w-full max-w-4xl px-10">
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div className="flex flex-col gap-3">
-          {app.icon}
+          {/* {app.icon} */}
           <div className="mt-2">
-            <h1 className="text-2xl font-semibold text-foreground">{app.name}</h1>
-            <p className="text-muted-foreground mt-1">{app.subtitle}</p>
+            <h1 className="text-sm font-semibold text-foreground">{app.name}</h1>
+            <p className="text-sm text-muted-foreground mt-1">{app.subtitle}</p>
           </div>
         </div>
         {isLoading ? (
@@ -364,26 +352,67 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
           </button>
         )}
       </div>
-
       {/* Screenshot Carousel */}
-      <div className="relative mb-8">
+      <div className="relative mb-8 overflow-visible" style={{ 
+        paddingLeft: app.screenshots.length > 3 && currentSlide > 0 ? '30px' : '0',
+        paddingRight: app.screenshots.length > 3 && currentSlide === 0 ? '30px' : '0'
+      }}>
         <div 
           ref={carouselRef}
-          className="flex gap-4 overflow-visible"
-          style={{ marginRight: "-60px" }}
+          className="flex gap-2"
+          style={{ 
+            transform: `translateX(${currentSlide > 0 ? -60 : 0}px)`,
+            transition: 'transform 0.3s ease-in-out'
+          }}
         >
           {app.screenshots.map((screenshot, index) => {
-            const isPartiallyVisible = index === 3; // Fourth card
+            const totalCards = app.screenshots.length;
+            if (totalCards <= 3) {
+              // Show all cards if 3 or less
+              return (
+                <div
+                  key={index}
+                  className={cn(
+                    "flex-shrink-0 w-[264px] h-[335px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
+                    screenshot.gradient
+                  )}
+                >
+                  {isLoading ? (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg className="w-8 h-8 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <path 
+                          d="M12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19" 
+                          stroke="#5c5c5c" 
+                          strokeWidth="2.5" 
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+                  ) : (
+                    screenshot.content
+                  )}
+                </div>
+              );
+            }
+            
+            // For more than 3 cards
+            const isRightPartial = currentSlide === 0 && index === 3;
+            const isLeftPartial = currentSlide > 0 && index === currentSlide - 1;
+            const isVisible = currentSlide === 0 
+              ? (index >= 0 && index < 3) 
+              : (index >= currentSlide && index < currentSlide + 3);
+            
+            const shouldShow = isVisible || isRightPartial || isLeftPartial;
+            if (!shouldShow) return null;
+            
             return (
               <div
                 key={index}
                 className={cn(
-                  "flex-shrink-0 w-[220px] h-[320px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
-                  screenshot.gradient
+                  "flex-shrink-0 h-[335px] rounded-2xl bg-gradient-to-b relative overflow-hidden transition-all duration-300",
+                  screenshot.gradient,
+                  isRightPartial ? "w-[30px]" : isLeftPartial ? "w-[30px]" : "w-[264px]"
                 )}
-                style={{
-                  transform: `translateX(${-currentSlide * 236}px)`,
-                }}
               >
                 {isLoading ? (
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -397,30 +426,19 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
                     </svg>
                   </div>
                 ) : (
-                  screenshot.content || (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg className="w-8 h-8 animate-spin" viewBox="0 0 24 24" fill="none">
-                        <path 
-                          d="M12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19" 
-                          stroke="#5c5c5c" 
-                          strokeWidth="2.5" 
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                  )
+                  screenshot.content
                 )}
-                {/* Fade overlay for partially visible card */}
-                {isPartiallyVisible && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/80 pointer-events-none" />
+                {/* Fade overlay for partially visible cards */}
+                {(isRightPartial || isLeftPartial) && (
+                  <div className={cn(
+                    "absolute inset-0 pointer-events-none",
+                    isRightPartial ? "bg-gradient-to-r from-transparent via-transparent to-white/80" : "bg-gradient-to-l from-transparent via-transparent to-white/80"
+                  )} />
                 )}
               </div>
             );
           })}
         </div>
-        
-        {/* Right edge fade overlay */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-r from-transparent to-background pointer-events-none" />
         
         {/* Navigation Arrows */}
         {currentSlide > 0 && (
@@ -431,10 +449,11 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
         )}
-        {currentSlide < app.screenshots.length - 1 && (
+        {app.screenshots.length > 3 && currentSlide < app.screenshots.length - 3 && (
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
+            className="absolute top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
+            style={{ right: '-15px' }}
           >
             <ChevronRight className="w-5 h-5 text-gray-500" />
           </button>
@@ -443,43 +462,43 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
 
       {/* Description */}
       <div className="mb-8">
-        <p className="text-foreground leading-relaxed">
-          {app.longDescription}
-        </p>
-        
-        {app.howToUse && (
-          <div className="mt-6">
-            <p className="text-foreground text-sm">{app.howToUse}</p>
-            {app.steps?.map((step, index) => (
-              <p key={index} className="text-muted-foreground text-sm mt-2">
-                {index + 1}. {step}
-              </p>
-            ))}
+          <p className="text-sm leading-relaxed" style={{ color: '#5D5D5D' }}>
+            {app.longDescription}
+          </p>
+          
+          {app.howToUse && (
+            <div className="mt-6">
+              <p className="text-sm" style={{ color: '#5D5D5D' }}>{app.howToUse}</p>
+              {app.steps?.map((step, index) => (
+                <p key={index} className="text-sm mt-2" style={{ color: '#5D5D5D' }}>
+                  - {step}
+                </p>
+              ))}
+            </div>
+          )}
+          
+          <div className="flex justify-end mt-4">
+            <button 
+              onClick={() => setShowMore(!showMore)}
+              className="text-sm hover:underline cursor-pointer"
+            >
+              Mehr
+            </button>
           </div>
-        )}
-        
-        <div className="flex justify-end mt-4">
-          <button 
-            onClick={() => setShowMore(!showMore)}
-            className="text-foreground text-sm font-medium hover:underline"
-          >
-            Mehr
-          </button>
         </div>
-      </div>
 
       {/* Information Section */}
       <div className="border-t border-border pt-6">
-        <h2 className="text-lg font-semibold mb-4">Info</h2>
+        <h2 className="text-sm font-semibold mb-4">Info</h2>
         <div className="grid grid-cols-2 gap-y-4">
           <div>
             <p className="text-sm text-muted-foreground">Kategorie</p>
-            <p className="text-sm text-foreground mt-0.5">{app.category}</p>
+            <p className="text-sm mt-0.5" style={{ color: '#5D5D5D' }}>{app.category}</p>
           </div>
           {app.capabilities && (
             <div>
               <p className="text-sm text-muted-foreground">Fähigkeiten</p>
-              <p className="text-sm text-foreground mt-0.5">{app.capabilities}</p>
+              <p className="text-sm mt-0.5" style={{ color: '#5D5D5D' }}>{app.capabilities}</p>
             </div>
           )}
         </div>
