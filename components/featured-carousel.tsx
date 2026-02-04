@@ -187,7 +187,7 @@ export function FeaturedCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % featuredApps.length);
-    }, 6000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -207,37 +207,47 @@ export function FeaturedCarousel() {
   return (
     <div className="relative -mt-1 group">
       <div className="relative h-[320px] rounded-4xl overflow-hidden bg-gradient-to-r from-cyan-400 via-cyan-300 to-yellow-200">
-        {/* Content */}
-        <div className="relative z-10 p-6 h-full flex flex-col max-w-[45%]">
-          {activeApp.icon}
-          <h2 className="text-xl font-semibold text-white mt-4 drop-shadow-sm">
-            {activeApp.title}
-          </h2>
-          <p className="text-sm text-white/90 mt-1 drop-shadow-sm">
-            {activeApp.subtitle}
-          </p>
-          <button className="mt-4 px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg w-fit transition-colors">
-            Anzeigen
-          </button>
-          
-          {/* Dots */}
-          <div className="flex gap-1.5 mt-auto bg-[#0000000F] p-1 rounded-full w-fit opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-            {featuredApps.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={cn(
-                  "w-1.5 h-1.5 rounded-full transition-colors",
-                  index === activeIndex ? "bg-white" : "bg-white/40"
-                )}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Slides Container */}
+        <div 
+          className="flex h-full transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        >
+          {featuredApps.map((app, index) => (
+            <div key={app.id} className="min-w-full h-full relative flex-shrink-0">
+              {/* Content */}
+              <div className="relative z-10 p-6 h-full flex flex-col max-w-[45%]">
+                {app.icon}
+                <h2 className="text-xl font-semibold text-white mt-4 drop-shadow-sm">
+                  {app.title}
+                </h2>
+                <p className="text-sm text-white/90 mt-1 drop-shadow-sm">
+                  {app.subtitle}
+                </p>
+                <button className="mt-4 px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg w-fit transition-colors">
+                  Anzeigen
+                </button>
+              </div>
 
-        {/* Preview Card */}
-        {activeApp.preview}
+              {/* Preview Card */}
+              {app.preview}
+            </div>
+          ))}
+        </div>
+        
+        {/* Dots */}
+        <div className="absolute bottom-6 left-6 z-20 flex gap-1.5 bg-[#0000000F] p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+          {featuredApps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              className={cn(
+                "w-1.5 h-1.5 rounded-full transition-colors",
+                index === activeIndex ? "bg-white" : "bg-white/40"
+              )}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
         
         {/* Left arrow - only show if can go left */}
         {canGoLeft && (
