@@ -250,16 +250,12 @@ export const appDetails: Record<
     capabilities: "Interaktiv",
     icon: (
       <div className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6L12 2z"
-            fill="#4A90A4"
-          />
-          <path
-            d="M12 5l1.5 4.5H18l-3.7 3 1.5 4.5-3.8-2.7-3.8 2.7 1.5-4.5-3.7-3h4.5L12 5z"
-            fill="#FFD700"
-          />
-        </svg>
+        <div className="grid grid-cols-2 gap-1">
+          <div className="w-3 h-3 rounded-full bg-white" />
+          <div className="w-3 h-3 rounded-full bg-white" />
+          <div className="w-3 h-3 rounded-full bg-white" />
+          <div className="w-3 h-3 rounded-full bg-white" />
+        </div>
       </div>
     ),
     screenshots: [
@@ -374,8 +370,13 @@ export const appDetails: Record<
     category: "Produktivität",
     capabilities: "Bildbearbeitung",
     icon: (
-      <div className="w-16 h-16 rounded-2xl bg-[#001e36] flex items-center justify-center">
-        <span className="text-[#31a8ff] font-bold text-2xl">Ps</span>
+      <div className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center">
+        <div className="grid grid-cols-2 gap-1">
+          <div className="w-3 h-3 rounded-full bg-white" />
+          <div className="w-3 h-3 rounded-full bg-white" />
+          <div className="w-3 h-3 rounded-full bg-white" />
+          <div className="w-3 h-3 rounded-full bg-white" />
+        </div>
       </div>
     ),
     screenshots: [
@@ -395,8 +396,13 @@ const defaultAppDetail = {
     "Diese App integriert sich mit ChatGPT, um erweiterte Funktionen bereitzustellen.",
   category: "Produktivität",
   icon: (
-    <div className="w-16 h-16 rounded-2xl bg-gray-200 flex items-center justify-center">
-      <span className="text-gray-600 font-bold text-2xl">?</span>
+    <div className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center">
+      <div className="grid grid-cols-2 gap-1">
+        <div className="w-3 h-3 rounded-full bg-white" />
+        <div className="w-3 h-3 rounded-full bg-white" />
+        <div className="w-3 h-3 rounded-full bg-white" />
+        <div className="w-3 h-3 rounded-full bg-white" />
+      </div>
     </div>
   ),
   screenshots: [
