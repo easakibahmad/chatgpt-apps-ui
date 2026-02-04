@@ -221,13 +221,13 @@ export function FeaturedCarousel() {
           </button>
           
           {/* Dots */}
-          <div className="flex gap-1.5 mt-auto">
+          <div className="flex gap-1.5 mt-auto bg-[#0000000F] p-1 rounded-full w-fit opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
             {featuredApps.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-colors",
+                  "w-1.5 h-1.5 rounded-full transition-colors",
                   index === activeIndex ? "bg-white" : "bg-white/40"
                 )}
                 aria-label={`Go to slide ${index + 1}`}
@@ -243,7 +243,7 @@ export function FeaturedCarousel() {
         {canGoLeft && (
           <button
             onClick={prevSlide}
-            className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-opacity duration-300 ease-in-out border border-gray-200 z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
+            className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#0000000F] rounded-full shadow-lg flex items-center justify-center hover:bg-[#0000001A] transition-all duration-300 ease-in-out z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
             <ChevronLeft className="w-6 h-6 text-gray-600" />
           </button>
@@ -253,7 +253,7 @@ export function FeaturedCarousel() {
         {canGoRight && (
           <button
             onClick={nextSlide}
-            className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-opacity duration-300 ease-in-out border border-gray-100 z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
+            className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#0000000F] rounded-full shadow-sm flex items-center justify-center hover:bg-[#0000001A] transition-all duration-300 ease-in-out z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
             <ChevronRight className="w-6 h-6 text-gray-500" />
           </button>
