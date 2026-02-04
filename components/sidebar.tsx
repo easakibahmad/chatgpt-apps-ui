@@ -37,10 +37,10 @@ export function Sidebar({ isOpen }: SidebarProps) {
     >
       {/* Logo */}
       <div className="flex items-center gap-2 px-2 h-[52px] flex justify-between items-center">
-        <div className="w-[36px] h-[36px] flex justify-center items-center">
+        <div className="w-[36px] h-[36px] flex justify-center items-center rounded-lg hover:bg-[#eaeaea] transition-colors cursor-pointer">
           <Image src={chatgptLogo} alt="chatgpt_logo" width={19.98} height={19.8} />
         </div>
-        <div className="w-[36px] h-[36px] flex justify-center items-center">
+        <div className="w-[36px] h-[36px] flex justify-center items-center rounded-lg hover:bg-[#eaeaea] transition-colors cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" 
           className="icon rounded-3xl opacity-50">
@@ -53,11 +53,10 @@ export function Sidebar({ isOpen }: SidebarProps) {
       {/* Navigation */}
       <nav className="flex flex-col mt-[8px] mb-[12px]">
         {navItems.map((item) => (
-          <a
+          <div
             key={item.label}
-            href={item.href}
             className={cn(
-              "flex min-w-0 items-center gap-1.5 h-[36px] mx-[6px] px-[10px] py-[6px] rounded-lg text-sm",
+              "flex min-w-0 items-center gap-1.5 h-[36px] mx-[6px] px-[10px] py-[6px] rounded-lg text-sm cursor-pointer",
               item.active
                 ? "bg-[#0000000F]"
                 : "text-sidebar-foreground hover:bg-[#0000000F]"
@@ -65,35 +64,33 @@ export function Sidebar({ isOpen }: SidebarProps) {
           >
             <item.icon size={18.3} className="flex-shrink-0 text-[#0D0D0D]" />
             <span className="text-[14px] text-[#0D0D0D]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{item.label}</span>
-          </a>
+          </div>
         ))}
       </nav>
 
       {/* Projekte Section */}
       <div className="flex flex-col gap-0.5 text-[#8F8F8F] mb-3">
-        <a
-          href="/projekte"
-          className="h-[32px] gap-0.5 flex items-center justify-start py-[6px] px-[16px] rounded-lg text-sm"
+        <div
+          className="h-[32px] gap-0.5 flex items-center justify-start py-[6px] px-[16px] rounded-lg text-sm cursor-pointer"
         >
           <span>Projekte</span>
           <ChevronRight className="w-3.5 h-3.5" />
-        </a>
+        </div>
       </div>
 
       {/* Chats Section */}
       <div className="flex flex-col gap-0.5 text-[#8F8F8F] mb-3">
-        <a
-          href="/chats"
-          className="h-[32px] gap-0.5 flex items-center justify-start py-[6px] px-[16px] rounded-lg text-sm"
+        <div
+          className="h-[32px] gap-0.5 flex items-center justify-start py-[6px] px-[16px] rounded-lg text-sm cursor-pointer"
         >
           <span>Chats</span>
           <ChevronRight className="w-3.5 h-3.5" />
-        </a>
+        </div>
       </div>
 
       {/* User Profile & Invite team */}
-      <div className="mt-auto mx-1.5 h-[123.14px]">
-        <div className="h-[51.14px] mx-auto flex items-center gap-2 px-[6px] pt-[6px] pr-[10px] pb-[6px] pl-[8px] rounded-lg hover:bg-[#0000000F] cursor-pointer">
+      <div className="mt-auto px-[6px] w-full h-[123.14px]">
+        <div className="h-[51.14px] w-full flex items-center gap-2 px-[6px] pt-[6px] pr-[10px] pb-[6px] pl-[8px] rounded-lg hover:bg-[#0000000F] cursor-pointer">
           <Avatar className="w-6 h-6">
             <AvatarFallback className="bg-[#7f8c8d] text-white text-[10px] font-medium">
               SK
