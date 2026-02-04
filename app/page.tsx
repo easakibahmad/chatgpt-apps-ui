@@ -76,16 +76,16 @@ export default function AppsPage() {
               <FeaturedCarousel />
 
               {/* Category Tabs */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 mx-4">
                 {categories.map((category) => (
                   <button
                     key={category.id}
                     onClick={() => setActiveCategory(category.id)}
                     className={cn(
-                      "px-4 py-1.5 text-sm font-medium rounded-full transition-colors",
+                      "px-4 h-[40px] text-sm font-normal rounded-full transition-colors cursor-pointer flex items-center",
                       activeCategory === category.id
-                        ? "bg-accent text-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                        ? "bg-[#f3f3f3] text-[#0D0D0D]"
+                        : "text-[#0D0D0D] hover:bg-[#f3f3f3]"
                     )}
                   >
                     {category.label}
