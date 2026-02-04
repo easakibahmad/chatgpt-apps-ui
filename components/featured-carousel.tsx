@@ -183,13 +183,16 @@ const featuredApps: FeaturedApp[] = [
 
 export function FeaturedCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % featuredApps.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   const activeApp = featuredApps[activeIndex];
 
@@ -205,7 +208,14 @@ export function FeaturedCarousel() {
   const canGoRight = activeIndex < featuredApps.length - 1;
 
   return (
-    <div className="relative -mt-1 group">
+    <div 
+      className="relative -mt-1 group"
+      tabIndex={0}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+    >
       <div className="relative h-[320px] rounded-4xl overflow-hidden bg-gradient-to-r from-cyan-400 via-cyan-300 to-yellow-200">
         {/* Slides Container */}
         <div 
