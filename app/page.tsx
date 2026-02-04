@@ -46,7 +46,7 @@ export default function AppsPage() {
 
       <main
         className={cn(
-          "min-h-screen transition-all duration-300 ease-in-out",
+          "min-h-screen transition-all duration-300 ease-in-out overflow-x-hidden",
           sidebarOpen ? "ml-[260px]" : "ml-0",
         )}
       >

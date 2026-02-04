@@ -45,7 +45,9 @@ export function Sidebar({ isOpen }: SidebarProps) {
             height={19.8}
           />
         </div>
-        <div className="w-[36px] h-[36px] flex justify-center items-center rounded-lg hover:bg-[#eaeaea] transition-colors cursor-pointer">
+        <div 
+          className="relative w-[36px] h-[36px] flex justify-center items-center rounded-lg hover:bg-[#eaeaea] transition-colors cursor-ew-resize group"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="23"
@@ -61,6 +63,9 @@ export function Sidebar({ isOpen }: SidebarProps) {
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="9" y1="3" x2="9" y2="21"></line>
           </svg>
+          <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 text-xs text-white bg-gray-900 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-bold">
+            Close Sidebar
+          </span>
         </div>
       </div>
 
