@@ -205,7 +205,7 @@ export function FeaturedCarousel() {
   const canGoRight = activeIndex < featuredApps.length - 1;
 
   return (
-    <div className="relative -mt-1">
+    <div className="relative -mt-1 group">
       <div className="relative h-[320px] rounded-4xl overflow-hidden bg-gradient-to-r from-cyan-400 via-cyan-300 to-yellow-200">
         {/* Content */}
         <div className="relative z-10 p-6 h-full flex flex-col max-w-[45%]">
@@ -243,7 +243,7 @@ export function FeaturedCarousel() {
         {canGoLeft && (
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-colors z-20 shadow-sm"
+            className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-opacity duration-300 ease-in-out border border-gray-200 z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
             <ChevronLeft className="w-6 h-6 text-gray-600" />
           </button>
@@ -253,9 +253,9 @@ export function FeaturedCarousel() {
         {canGoRight && (
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-colors z-20 shadow-sm"
+            className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-opacity duration-300 ease-in-out border border-gray-100 z-20 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
-            <ChevronRight className="w-6 h-6 text-gray-600" />
+            <ChevronRight className="w-6 h-6 text-gray-500" />
           </button>
         )}
       </div>

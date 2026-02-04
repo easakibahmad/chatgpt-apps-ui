@@ -475,7 +475,7 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
       </div>
       {/* Screenshot Carousel */}
       <div
-        className="relative mb-8 overflow-visible"
+        className="relative mb-8 overflow-visible group"
         style={{
           paddingLeft:
             app.screenshots.length > 3 && currentSlide > 0 ? "30px" : "0",
@@ -588,7 +588,7 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
         {currentSlide > 0 && (
           <button
             onClick={prevSlide}
-            className="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200 z-10"
+            className="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-opacity duration-300 ease-in-out border border-gray-200 z-10 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
           >
             <ChevronLeft className="w-6 h-6 text-gray-600" />
           </button>
@@ -597,7 +597,7 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
           currentSlide < app.screenshots.length - 3 && (
             <button
               onClick={nextSlide}
-              className="cursor-pointer absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
+              className="cursor-pointer absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-opacity duration-300 ease-in-out border border-gray-100 z-10 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
               style={{ right: "-13px" }}
             >
               <ChevronRight className="w-6 h-6 text-gray-500" />
