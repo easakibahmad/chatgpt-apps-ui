@@ -8,7 +8,7 @@ import {
   ImageIcon,
   Grid3X3,
   Terminal,
-  FolderOpen,
+  FolderPlus,
   ChevronRight,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -24,7 +24,7 @@ const navItems = [
   { icon: ImageIcon, label: "Bibliothek", href: "/images", active: false },
   { icon: Grid3X3, label: "Apps", href: "/apps", active: true },
   { icon: Terminal, label: "Codex", href: "/codex", active: false },
-  { icon: FolderOpen, label: "GPTs", href: "/gpts", active: false },
+  { icon: FolderPlus, label: "GPTs", href: "/gpts", active: false },
 ];
 
 export function Sidebar({ isOpen }: SidebarProps) {
@@ -51,43 +51,43 @@ export function Sidebar({ isOpen }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex flex-col px-2 gap-0.5">
+      <nav className="flex flex-col mt-[8px] mb-[12px]">
         {navItems.map((item) => (
           <a
             key={item.label}
             href={item.href}
             className={cn(
-              "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+              "flex min-w-0 items-center gap-1.5 h-[36px] mx-[6px] px-[10px] py-[6px] rounded-lg text-sm",
               item.active
-                ? "bg-sidebar-accent font-medium"
-                : "text-sidebar-foreground hover:bg-sidebar-accent"
+                ? "bg-[#0000000F]"
+                : "text-sidebar-foreground hover:bg-[#0000000F]"
             )}
           >
-            <item.icon className="w-5 h-5" />
-            <span>{item.label}</span>
+            <item.icon size={18.3} className="flex-shrink-0 text-[#0D0D0D]" />
+            <span className="text-[14px] text-[#0D0D0D]" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{item.label}</span>
           </a>
         ))}
       </nav>
 
       {/* Projekte Section */}
-      <div className="flex flex-col px-2 mt-4 gap-0.5">
+      <div className="flex flex-col gap-0.5 text-[#8F8F8F] mb-3">
         <a
           href="/projekte"
-          className="flex items-center justify-between px-3 py-2 rounded-lg text-sm text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
+          className="h-[32px] gap-0.5 flex items-center justify-start py-[6px] px-[16px] rounded-lg text-sm"
         >
           <span>Projekte</span>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          <ChevronRight className="w-3.5 h-3.5" />
         </a>
       </div>
 
       {/* Chats Section */}
-      <div className="flex flex-col px-2 mt-2 gap-0.5">
+      <div className="flex flex-col gap-0.5 text-[#8F8F8F] mb-3">
         <a
           href="/chats"
-          className="flex items-center justify-between px-3 py-2 rounded-lg text-sm text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
+          className="h-[32px] gap-0.5 flex items-center justify-start py-[6px] px-[16px] rounded-lg text-sm"
         >
           <span>Chats</span>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          <ChevronRight className="w-3.5 h-3.5" />
         </a>
       </div>
 
