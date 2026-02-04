@@ -330,27 +330,27 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
   return (
     <div className="mx-auto w-full max-w-4xl px-10">
       {/* Header */}
-      <div className="flex items-start justify-between mb-6">
-        <div className="flex flex-col gap-3">
-          {/* {app.icon} */}
-          <div className="mt-2">
-            <h1 className="text-sm font-semibold text-foreground">{app.name}</h1>
-            <p className="text-sm text-muted-foreground mt-1">{app.subtitle}</p>
-          </div>
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-1">
+          <h1 className="text-2xl font-medium" style={{ color: '#0D0D0D' }}>{app.name}</h1>
+          {isLoading ? (
+            <button 
+              disabled
+              className="px-5 py-2.5 bg-gray-200 text-gray-500 rounded-full text-sm font-medium flex items-center gap-2"
+            >
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Wird geladen
+            </button>
+          ) : (
+            <button 
+              className="bg-black text-white rounded-full text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity px-4"
+              style={{ height: '36px' }}
+            >
+              Verbinden
+            </button>
+          )}
         </div>
-        {isLoading ? (
-          <button 
-            disabled
-            className="px-5 py-2.5 bg-gray-200 text-gray-500 rounded-full text-sm font-medium flex items-center gap-2"
-          >
-            <Loader2 className="w-4 h-4 animate-spin" />
-            Wird geladen
-          </button>
-        ) : (
-          <button className="px-5 py-2.5 bg-foreground text-background rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-            Verbinden
-          </button>
-        )}
+        <p className="text-sm mt-2" style={{ color: '#5D5D5D' }}>{app.subtitle}</p>
       </div>
       {/* Screenshot Carousel */}
       <div className="relative mb-8 overflow-visible" style={{ 
@@ -444,18 +444,18 @@ export function AppDetail({ appId, onBack }: AppDetailProps) {
         {currentSlide > 0 && (
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200 z-10"
+            className="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200 z-10"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
+            <ChevronLeft className="w-6 h-6 text-gray-600" />
           </button>
         )}
         {app.screenshots.length > 3 && currentSlide < app.screenshots.length - 3 && (
           <button
             onClick={nextSlide}
-            className="absolute top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
-            style={{ right: '-15px' }}
+            className="cursor-pointer absolute top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full shadow-sm flex items-center justify-center hover:bg-white transition-colors border border-gray-100 z-10"
+            style={{ right: '-13px' }}
           >
-            <ChevronRight className="w-5 h-5 text-gray-500" />
+            <ChevronRight className="w-6 h-6 text-gray-500" />
           </button>
         )}
       </div>

@@ -243,9 +243,9 @@ export function FeaturedCarousel() {
         {canGoLeft && (
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-colors z-20 shadow-sm"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-colors z-20 shadow-sm"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
+            <ChevronLeft className="w-6 h-6 text-gray-600" />
           </button>
         )}
         
@@ -253,9 +253,9 @@ export function FeaturedCarousel() {
         {canGoRight && (
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-colors z-20 shadow-sm"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-colors z-20 shadow-sm"
           >
-            <ChevronRight className="w-5 h-5 text-gray-600" />
+            <ChevronRight className="w-6 h-6 text-gray-600" />
           </button>
         )}
       </div>
